@@ -17,14 +17,25 @@ function App() {
 
         <div className="App">
 
-          <Nav />
+			<Nav />
 
-          <Redirect from = "/" to = "/shop" />
+			{
+				
+			}
+			<Redirect from = "/" to = "/shop" />
 
-          <Route path = "/shop"><Shop category = "Cat"/></Route>
-          <Route path = "/basket"><Basket /></Route>
-          <Route path = "/login"><Login /></Route>
-          <Route path = "/register"><Register /></Route>
+			<div className = "container">
+
+				<Route path = "/shop"><Shop category = "Cat"/></Route>
+				<Route path = "/basket"><Basket /></Route>
+				<Route path = "/login"><Login /></Route>
+				<Route path = "/register"><Register /></Route>
+
+          	</div>
+
+          
+
+          
 
           <Footer />
 
