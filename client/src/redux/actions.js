@@ -1,1 +1,0 @@
-export const setUser = (user) => ({type: ActionTypes.SET_USERS, payload: user});

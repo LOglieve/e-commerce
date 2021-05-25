@@ -1,10 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 
 
 export default function Nav() {
-    const loggedIn = false;
+    
+    const loggedIn = useSelector(state => state.user.logged_in);
+    console.log(loggedIn);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+    }
+
     return(
         <div className = "nav-bar">
 
@@ -12,16 +20,16 @@ export default function Nav() {
             <h1 id = "company-name">e-commerce</h1>
 
             <div id = "navButtons">
-               
-            </div>
-            <Link to = "/shop"><button>Shop</button></Link>
+                <Link to = "/shop"><button>Shop</button></Link>
                 <Link to = "/contact"><button>Contact Us</button></Link>
+            </div>
+            
 
             <div>
 
                 {
-                    (loggedIn == false) ? <div><Link to = "/login"><button>Login</button></Link>
-                    <Link to = "/register"><button>Register</button></Link></div> : ""
+                    (loggedIn == false) ? <div><Link  to = "/login"><button>Login</button></Link>
+                    <Link to = "/register"><button id = "nav-link-register">Register</button></Link></div> : ""
                 }
                 
 
@@ -38,3 +46,4 @@ export default function Nav() {
     )
 
 }
+

@@ -1,11 +1,16 @@
 import React from 'react';
 import { createStore, combineReducers } from 'redux';
-import {userReducer, basketReducer} from './reducers';
+import {userReducer} from './userSlice';
+import {basketReducer} from './basketSlice';
 
 
-const reducers = combineReducers({userReducer, basketReducer});
 
-export default createStore(reducers);
+const rootReducer = combineReducers({
+    user: userReducer, 
+    basket: basketReducer
+});
+
+export default createStore(rootReducer);
 
 
 //STORE
