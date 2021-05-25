@@ -14,6 +14,7 @@ CREATE TABLE orders(
 
 CREATE TABLE products(
   id serial unique,
+  product varchar(124),
   description varchar(255),
   quantity int,
   price int 
