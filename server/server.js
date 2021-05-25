@@ -11,10 +11,11 @@ app.use(express.json());
 
 //get products
 
-app.get('products', async(req, res) =>{
+app.get('/products', async(req, res) =>{
     try{
 		const products = await pool.query("SELECT * FROM products");
-		res.json(products);
+		console.log(products.rows);
+        res.json(products.rows);
 	}catch(err){
 		console.log(err.message);
 	}
