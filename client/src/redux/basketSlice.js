@@ -26,17 +26,19 @@ export const basketEmpty = () => {
 export function basketReducer(state = basketInitState, action){
     switch(action.type){
         case 'ADD_ITEM':
-            return{
+            return {
                 
             }
 
         case 'REMOVE_ITEM':
+            break;
 
         case 'EMPTY_BASKET':
             return {
                 
             };
-        default: return state;
+        default: 
+            return state;
 
     }
 }

@@ -7,7 +7,7 @@ export default function Product(props) {
     return(
         <Link className = "col-3 card" to = {`/product/${props.productData.id}`}>
             <div > 
-                <img className = "card-img-top" src = {require("../resources/product_images/" + props.productData.img_id[0] + ".jpg")?.default} width = "100%" />
+                <img alt="" className = "card-img-top" src = {require("../resources/product_images/" + props.productData.img_id[0] + ".jpg")?.default} width = "100%" />
                 <h1>{props.productData.product}</h1>
                 <p>{props.productData.description}</p>
                 

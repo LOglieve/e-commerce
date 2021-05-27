@@ -14,7 +14,7 @@ export default function Nav() {
     }
 
     return(
-        <Nav>
+        <div>
             <img id = "logo" alt = "logo"/>
             <h1 id = "company-name">e-commerce</h1>
 
@@ -27,7 +27,7 @@ export default function Nav() {
             <div>
 
                 {
-                    (loggedIn == false) ? <div><Link  to = "/login"><button>Login</button></Link>
+                    (loggedIn === false) ? <div><Link  to = "/login"><button>Login</button></Link>
                     <Link to = "/register"><button id = "nav-link-register">Register</button></Link></div> : ""
                 }
                 
@@ -40,7 +40,7 @@ export default function Nav() {
 
         
             <button id = "basket">Basket</button>
-        </Nav>
+        </div>
         // <div className = "nav-bar container-fluid">
 
             

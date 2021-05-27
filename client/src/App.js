@@ -19,10 +19,6 @@ function App() {
         <div className="App">
 
 			<Nav />
-
-			{
-				
-			}
 			<Redirect from = "/" to = "/shop" />
 
 			<div>
