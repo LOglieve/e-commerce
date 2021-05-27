@@ -7,6 +7,7 @@ import Basket from './components/basket';
 
 import Login from './components/users/login';
 import Register from './components/users/register';
+import ProductPage from './components/productPage';
 
 function App() {
   const loggedIn = false;
@@ -24,12 +25,13 @@ function App() {
 			}
 			<Redirect from = "/" to = "/shop" />
 
-			<div className = "container">
+			<div>
 
-				<Route path = "/shop"><Shop category = "Cat"/></Route>
+				<Route path = "/shop"><Shop  category = "Cat"/></Route>
 				<Route path = "/basket"><Basket /></Route>
 				<Route path = "/login"><Login /></Route>
 				<Route path = "/register"><Register /></Route>
+				<Route path = "/product/:productId"><ProductPage /></Route>
 
           	</div>
 

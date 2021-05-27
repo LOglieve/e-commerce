@@ -14,7 +14,7 @@ app.use(express.json());
 app.get('/products', async(req, res) =>{
     try{
 		const products = await pool.query("SELECT * FROM products");
-		console.log(products.rows);
+		//console.log(products.rows);
         res.json(products.rows);
 	}catch(err){
 		console.log(err.message);
@@ -23,6 +23,20 @@ app.get('/products', async(req, res) =>{
 
 
 });
+
+app.get('/product/:productId', async(req, res) => {
+    const productId = req.params.productId;
+    console.log(productId);
+    try{
+        console.log("in");
+        const product = await pool.query("SELECT * FROM products WHERE id = $1", [productId]);
+        console.log('out');
+		console.log(product.rows);
+        res.json(product.rows);
+    }catch(err){
+
+    }
+})
 
 //create user
 

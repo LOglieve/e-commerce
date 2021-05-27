@@ -14,8 +14,7 @@ export default function Nav() {
     }
 
     return(
-        <div className = "nav-bar">
-
+        <Nav>
             <img id = "logo" alt = "logo"/>
             <h1 id = "company-name">e-commerce</h1>
 
@@ -41,8 +40,12 @@ export default function Nav() {
 
         
             <button id = "basket">Basket</button>
+        </Nav>
+        // <div className = "nav-bar container-fluid">
 
-        </div>
+            
+
+        // </div>
     )
 
 }
