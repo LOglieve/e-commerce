@@ -2,26 +2,32 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 
 import Nav from './components/nav';
 import Footer from './components/footer';
-import Shop from './components/shop';
-import Basket from './components/basket';
+import Shop from './components/shop/shop';
+import Basket from './components/basket/basket';
 
 import Login from './components/users/login';
 import Register from './components/users/register';
-import ProductPage from './components/productPage';
+import ProductPage from './components/shop/productPage';
 
 function App() {
   const loggedIn = false;
+
+  const containerStyle = {
+	  backgroundColor: 'red',
+	  paddingBottom: '50px'
+  }
+
   return (
     
 
       <Router>
 
-        <div className="App">
+        <div className="App flex">
 
 			<Nav />
 			<Redirect from = "/" to = "/shop" />
 
-			<div>
+			<div className = "container" style = {containerStyle}> 
 
 				<Route path = "/shop"><Shop  category = "Cat"/></Route>
 				<Route path = "/basket"><Basket /></Route>
@@ -35,9 +41,10 @@ function App() {
 
           
 
-          <Footer />
+          
 
         </div>
+		<Footer />
 
       </Router>
 
