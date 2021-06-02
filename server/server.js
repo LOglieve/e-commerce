@@ -65,13 +65,12 @@ app.post("/createuser", async(req, res)=> {
 app.post("/login", async(req, res) =>{
     try{
         const {email, password} = req.body;
-        const 
 
 
     }catch(err){
         console.error(err.message);
     }
-})
+});
 
 //update user
 

@@ -1,6 +1,21 @@
 import React from 'react';
+import { useSelector, connect } from "react-redux";
 
-export default function Login() {
+
+function Login(props) {
+    const loggedIn = useSelector(state => state.user.logged_in);
+
+    const login = (email, password) => {
+        const fetchURL = './login';
+        fetch(fetchURL).then(response => {
+            response.json().then(userData => {
+                console.log(userData);
+            })
+        })
+        // props.dispatch({type: 'Login', payload: {user_id: id, user_fName}})
+
+    }
+
     return(
         <div className = "login">
          
@@ -18,3 +33,4 @@ export default function Login() {
     )
 
 }
+export default connect()(Login);

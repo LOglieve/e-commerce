@@ -1,4 +1,5 @@
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import { useSelector, connect } from "react-redux";
 
 import Nav from './components/nav';
 import Footer from './components/footer';
@@ -9,13 +10,21 @@ import Login from './components/users/login';
 import Register from './components/users/register';
 import ProductPage from './components/shop/productPage';
 
-function App() {
-  const loggedIn = false;
+function App(props) {
+	const loggedIn = useSelector(state => state.user.logged_in);
 
   const containerStyle = {
 	  backgroundColor: 'red',
 	  paddingBottom: '50px'
   }
+
+  
+
+  const logout = () => {
+
+  }
+
+
 
   return (
     
@@ -31,8 +40,13 @@ function App() {
 
 				<Route path = "/shop"><Shop  category = "Cat"/></Route>
 				<Route path = "/basket"><Basket /></Route>
-				<Route path = "/login"><Login /></Route>
-				<Route path = "/register"><Register /></Route>
+
+				{
+				(loggedIn === false) ? <div><Route path = "/login"><Login /></Route>
+				<Route path = "/register"><Register /></Route></div>: "" 
+				}
+				
+				
 				<Route path = "/product/:productId"><ProductPage /></Route>
 
           	</div>
@@ -53,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect()(App);
