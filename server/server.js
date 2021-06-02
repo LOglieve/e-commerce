@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('./database/db');
 const cors = require("cors");
+const bcrypt = require('bcryptjs');
 
 const app = new express();
 
@@ -38,17 +39,22 @@ app.get('/product/:productId', async(req, res) => {
     }
 })
 
-//create user
+//register
 
 app.post("/createuser", async(req, res)=> {
     try{
         console.log(req.body);
         const {email, password} = req.body;
-        console.log(dOB);
 
-        const newUser = await pool.query("INSERT INTO users (email, password) VALUES($1, $2) RETURNING *", [email, password]);
+        const checkEmail = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
+
+        console.log(checkEmail);
+
+
+        //const newUser = await pool.query("INSERT INTO users (email, password) VALUES($1, $2) RETURNING *", [email, password]);
         
-        res.json(newUser.rows[0]);
+        //res.json(newUser.rows[0]);
+        res.status('500').send({error: "testing"});
 
     }catch(err){
         console.error(err.message);
@@ -56,6 +62,16 @@ app.post("/createuser", async(req, res)=> {
 });
 
 //read user (login)
+app.post("/login", async(req, res) =>{
+    try{
+        const {email, password} = req.body;
+        const 
+
+
+    }catch(err){
+        console.error(err.message);
+    }
+})
 
 //update user
 
