@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('./database/db');
 const cors = require("cors");
 const bcrypt = require('bcryptjs');
+const e = require('express');
 
 const app = new express();
 
@@ -9,6 +10,17 @@ const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+
+const createHash = async(password) => {
+
+    bcrypt.genSalt().then(salt => {
+        bcrypt.hash(password, salt).then(hash => {
+            console.log(hash);
+            return hash;
+        })
+    });
+
+}
 
 //get products
 
@@ -40,24 +52,36 @@ app.get('/product/:productId', async(req, res) => {
 })
 
 //register
-
 app.post("/createuser", async(req, res)=> {
     try{
-        console.log(req.body);
+        //extract json body
         const {email, password} = req.body;
 
+        //search for user email
         const checkEmail = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
 
-        console.log(checkEmail);
+        //if email not already registered
+        if(checkEmail.rows.length === 0){
+            //hash and salt password for storage in database
+            const salt = await bcrypt.genSalt();
+            const hash = await bcrypt.hash(password, salt);
 
+            const newUser =  await pool.query("INSERT INTO users (email, password) VALUES($1, $2) RETURNING *", [email, hash]);
+            if(newUser.rows.length != 0){
+                res.status('201');
 
-        //const newUser = await pool.query("INSERT INTO users (email, password) VALUES($1, $2) RETURNING *", [email, password]);
-        
-        //res.json(newUser.rows[0]);
-        res.status('500').send({error: "testing"});
+            }else{
+                res.status('500');
+
+            }
+      
+        }else{
+            res.status('409').send({error: "email already registered"});
+        }
 
     }catch(err){
         console.error(err.message);
+        res.status('500').send({error: err.message});
     }
 });
 
@@ -65,6 +89,13 @@ app.post("/createuser", async(req, res)=> {
 app.post("/login", async(req, res) =>{
     try{
         const {email, password} = req.body;
+        
+        //search for email in database
+        const checkEmail = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
+        if(checkEmail.rows.length === 0){
+        }
+
+        const compare = await bcrypt.compare(password, hash);
 
 
     }catch(err){
@@ -81,3 +112,16 @@ app.post("/login", async(req, res) =>{
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}.`));
+
+
+//random stuff
+            
+            // const hash = createHash(password);
+            // console.log(hash);
+            // bcrypt.genSalt().then(salt => {
+            //     bcrypt.hash(password, salt).then(hash => {
+            //         console.log(hash);
+                    
+                    
+            //     })
+            // });
