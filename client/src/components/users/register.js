@@ -46,6 +46,7 @@ export default function Register() {
         const userE = email.email;
         const userP = password.pass;
         console.log(userE, userP);
+        console.log(valid);
         if(valid){
             setMessage('');
             const body = {email: userE, password: userP};

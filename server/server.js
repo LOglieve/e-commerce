@@ -59,7 +59,6 @@ app.post("/createuser", async(req, res)=> {
 
         //search for user email
         const checkEmail = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
-
         //if email not already registered
         if(checkEmail.rows.length === 0){
             //hash and salt password for storage in database
@@ -91,11 +90,24 @@ app.post("/login", async(req, res) =>{
         const {email, password} = req.body;
         
         //search for email in database
-        const checkEmail = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
+        const checkEmail = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        console.log(checkEmail);
         if(checkEmail.rows.length === 0){
+            res.status('404').send({error: 'Invalid Credentials'})
+        }else{
+            const data = checkEmail.rows[0];
+            const hash = data.password;
+            const compare = await bcrypt.compare(password, hash);
+            if(compare){
+                res.status('200').send({userData: {email: data.email, id: data.id}})
+            }else{
+                res.status('401').send({error: 'Invalid Credentials'})
+
+            }
+
         }
 
-        const compare = await bcrypt.compare(password, hash);
+        
 
 
     }catch(err){

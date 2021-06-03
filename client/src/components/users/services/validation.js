@@ -9,9 +9,7 @@ export const validate = (email, password) => {
     }
 }
 
-  
-
-const validateEmail = (email) =>{
+export const validateEmail = (email) =>{
     if(email.email === email.checkEmail && email.email != ''){
         return true;
     }
@@ -28,3 +26,4 @@ const validatePassword = (password) => {
     return false;
 
 }
+
