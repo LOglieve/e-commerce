@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { useSelector, connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-//
+
 
 
 function Login(props) {
@@ -10,18 +11,9 @@ function Login(props) {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
+    let history = useHistory();
 
-
-    const login = (email, password) => {
-        const fetchURL = './login';
-        fetch(fetchURL).then(response => {
-            response.json().then(userData => {
-                console.log(userData);
-            })
-        })
-        // props.dispatch({type: 'Login', payload: {user_id: id, user_fName}})
-
-    }
+ 
 
     const handleChange = (e) => {
         if(e.target.name === 'email'){
@@ -57,11 +49,27 @@ function Login(props) {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(body)
             }).then(response => {
-                response.json().then(data =>{
-                    console.log(data);
+                console.log(response);
+                if(response.status === 200){
+                    const data = response.json();
+                    console.log('egg');
+                    props.dispatch({type: 'LOGIN', payload: {
+                        id: data.id, 
+                        email: data.email, 
+                        fName: data.fName, 
+                        lName: data.lName
+                    }});
+                    console.log(loggedIn);
+                    history.push("/shop");
+
                     
 
-                });
+
+                }else{
+                    setMessage('Invalid Credentials');
+                }
+                
+                    
             });
         }else{
             setMessage('Invalid Credentials');
