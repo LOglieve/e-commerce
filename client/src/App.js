@@ -4,6 +4,7 @@ import { useSelector, connect } from "react-redux";
 import Nav from './components/nav';
 import Footer from './components/footer';
 import Shop from './components/shop/shop';
+import Search from './components/shop/search';
 import Basket from './components/basket/basket';
 
 import Login from './components/users/login';
@@ -16,7 +17,7 @@ function App(props) {
 
   const containerStyle = {
 	  backgroundColor: 'red',
-	  paddingBottom: '50px'
+	  
   }
 
   
@@ -32,15 +33,16 @@ function App(props) {
 
       <Router>
 
-        <div className="App flex bg-secondary">
+        <div className="App flex bg-main">
 
 			<Nav />
 			<Redirect from = "/" to = "/shop" />
 
-			<div className = "container fill" style = {containerStyle}> 
+			<div className = "container fill"> 
 
 				<Route path = "/shop"><Shop  category = "Cat"/></Route>
 				<Route path = "/basket"><Basket /></Route>
+				<Route path = "/search/:searchText"><Search /></Route>
 
 				{
 					(loggedIn === false) ? 

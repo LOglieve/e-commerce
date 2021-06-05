@@ -67,7 +67,7 @@ app.post("/createuser", async(req, res)=> {
             console.log('eeeee');
             const newUser =  await pool.query("INSERT INTO users (email, password) VALUES($1, $2) RETURNING *", [email, hash]);
             console.log(newUser + ' eeeeee');
-            if(newUser.rows.length != 0){
+            if(newUser.rows.length !== 0){
                 res.status('201');
 
             }else{
@@ -122,7 +122,26 @@ app.post("/login", async(req, res) =>{
 
 //get user orders
 
+//SEARCH
+app.get('/search/:search', async(req, res)=> {
+    try{
+        const search = req.params.search;
+        console.log(search);
+        const poolQuery = `SELECT * FROM products WHERE product ILIKE '%${search}%';`
+        console.log(poolQuery);
+        const products = await pool.query(poolQuery);
+        console.log(products);
+        if(products.rows.length !== 0){
+            res.status('200').send(products.rows);
+        }else{
+            res.status('404').send({error: 'No products of that description found.'})
+        }
 
+    }catch(err){
+        console.log(err.message);
+    }
+
+});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}.`));
 

@@ -1,31 +1,25 @@
 import React, {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import Product from './product';
 
-
-export default function Shop(props) {
+export default function Search(props){
     const [products, setProducts] = useState([]);
-    
+    const {searchText} = useParams();
+    console.log(searchText);
 
-    const getProducts = async() =>{
-        try{
-            fetch('./products').then(response => {
-                response.json().then(response => {
-                    setProducts(response);
-                });
-
+    const getProducts = async() => {
+        const searchURL = `/search/${searchText}`;
+            fetch(searchURL).then(response => {
+                response.json().then(data =>{
+                    setProducts(data);
+                })
             });
-        }catch(error){
-
-        }
-
     }
 
     useEffect(() =>{
         getProducts();
 
-    }, []);
-
-
+    }, [searchText]);
 
 
     return(
@@ -42,5 +36,5 @@ export default function Shop(props) {
 
         </div>
     )
-
+    
 }

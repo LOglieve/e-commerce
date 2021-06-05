@@ -31,17 +31,6 @@ export default function Register() {
       
     }
 
-    // const validate = () => {
-    //     if(email.email === email.checkEmail && email.email != ''){
-    //         if(password.pass === password.checkPass && password.pass != ''){
-    //             return true;
-    //         }
-    //     }
-
-    //     return false;
-    // }
-    
-
     const handleSubmit = (e) => {
         e.preventDefault();
 

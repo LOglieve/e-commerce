@@ -1,4 +1,14 @@
 .fill{
     min-height: 100vh;
     height: 100%;
+    padding-bottom: '50px'
+}
+
+.bg-main{
+    background-color: #342E37;
+}
+
+.bg-red{
+    background-color: #B80C09;
+
 }
