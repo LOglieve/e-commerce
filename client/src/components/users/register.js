@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {validate} from './services/validation';
+import { useHistory } from "react-router-dom";
 
 export default function Register() {
     const [email, setEmail] = useState({email: '', checkEmail: ''});
     const [password, setPassword] = useState({pass: '', checkPass: ''});
     const [message, setMessage] = useState('');
+
+    let history = useHistory();
 
     const handleEmailChange = (e) => {
         if(e.target.name === 'email'){
@@ -55,9 +58,17 @@ export default function Register() {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(body)
             }).then(response =>{
-                response.json().then(data =>{
-                    console.log(data);
-                })
+                console.log('benis');
+                console.log(response);
+                if(response.status === 201){
+                    response.json().then(data =>{
+                        console.log(data);
+                        history.push("/login");
+                    })
+                }else{
+                    setMessage("Invalid credentials");
+                }
+                
                 
             })
 

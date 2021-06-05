@@ -10,14 +10,14 @@ export const validate = (email, password) => {
 }
 
 export const validateEmail = (email) =>{
-    if(email.email === email.checkEmail && email.email != ''){
+    if(email.email === email.checkEmail && email.email !== ''){
         return true;
     }
 
 }
 
 const validatePassword = (password) => {
-    if(password.pass === password.checkPass && password.pass != ''){
+    if(password.pass === password.checkPass && password.pass !== ''){
         if(password.pass.length >= 8 && password.pass.length <= 28 ){
             return true;
         }

@@ -64,8 +64,9 @@ app.post("/createuser", async(req, res)=> {
             //hash and salt password for storage in database
             const salt = await bcrypt.genSalt();
             const hash = await bcrypt.hash(password, salt);
-
+            console.log('eeeee');
             const newUser =  await pool.query("INSERT INTO users (email, password) VALUES($1, $2) RETURNING *", [email, hash]);
+            console.log(newUser + ' eeeeee');
             if(newUser.rows.length != 0){
                 res.status('201');
 

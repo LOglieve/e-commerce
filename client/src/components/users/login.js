@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useSelector, connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 
 
@@ -65,6 +65,8 @@ function Login(props) {
                     
 
 
+                // }else if(response.status === '404'){
+                //     setMessage('Email not registered');
                 }else{
                     setMessage('Invalid Credentials');
                 }
@@ -80,24 +82,41 @@ function Login(props) {
 
 
     return(
-        <div className = "login" >
+        <div className = "text-center " >
 
-            {(message != '')? <h1>{message}</h1> : ''}
+            {(message !== '')? <h1>{message}</h1> : ''}
+
+            <div className = "row">
+
+            </div>
         
-            <form onSubmit = {handleSubmit}>
-                <label for = "email">Email</label>
-                <input name = "email" type = "text" onChange = {handleChange}></input>
-                <label for = "password">Password</label>
-                <input name = "password" type = "password" onChange = {handleChange}></input>
+            <form className = "form-horizontal mb-4 col-md-4 col-md-offset-4" onSubmit = {handleSubmit}>
+                
+                <div className = "input-group mb-4">
+                    <div className = "input-group-prepend"><label className = "input-group-text" for = "email">Email</label></div>
+                    
+                    <input className = "form-control" placeholder = "Email Address" name = "email" type = "text" onChange = {handleChange}></input>
+                </div>
+
+                <div className = "input-group"> 
+                    <div className = "input-group-prepend">
+                        <label className = "input-group-text" for = "password">Password</label>
+                    </div>
+                    <input className = "form-control" placeholder = "Password" name = "password" type = "password" onChange = {handleChange}></input>
+                </div>
+
+                
+                
                     
                     
-                <input type = "submit"></input>
+                <input className = "btn btn-lg btn-dark btn-block" type = "submit"></input>
 
             
 
             
 
             </form>
+            {(message !== '')? <Link to = "./register"><button>Register</button></Link> : ''}
         </div>
          
     )

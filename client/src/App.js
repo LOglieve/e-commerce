@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import { useSelector, connect } from "react-redux";
 
 import Nav from './components/nav';
@@ -8,6 +8,7 @@ import Basket from './components/basket/basket';
 
 import Login from './components/users/login';
 import Register from './components/users/register';
+import Profile from './components/users/profile';
 import ProductPage from './components/shop/productPage';
 
 function App(props) {
@@ -31,19 +32,33 @@ function App(props) {
 
       <Router>
 
-        <div className="App flex">
+        <div className="App flex bg-secondary">
 
 			<Nav />
 			<Redirect from = "/" to = "/shop" />
 
-			<div className = "container" style = {containerStyle}> 
+			<div className = "container fill" style = {containerStyle}> 
 
 				<Route path = "/shop"><Shop  category = "Cat"/></Route>
 				<Route path = "/basket"><Basket /></Route>
 
 				{
-				(loggedIn === false) ? <div><Route path = "/login"><Login /></Route>
-				<Route path = "/register"><Register /></Route></div>: "" 
+					(loggedIn === false) ? 
+					<div>
+						<Route path = "/login">
+							<Login />
+						</Route>
+						<Route path = "/register">
+							<Register />
+						</Route>
+					</div>
+					: 
+					<div>
+						<Route path = '/profile/:userId'>
+							<Profile />
+						</Route>
+						
+					</div> 
 				}
 				
 				

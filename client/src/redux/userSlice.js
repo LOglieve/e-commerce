@@ -36,7 +36,15 @@ export function userReducer(state = userInitState, action) {
                 user_lName: action.payload.lName
             }
         case 'LOGOUT':
-            return state.logged_in = false;
+            return {...state,
+                logged_in: false,
+                user_id: null,
+                user_email: null,
+                user_fName: null,
+                user_lName: null
+
+
+            }
         default: return state;
     }
 

@@ -1,5 +1,3 @@
-import {createReducer} from '@reduxjs/toolkit';
-
 const basketInitState = {
     items: [[1, 1], [2, 4], [3, 1]],
     total: 0
@@ -80,9 +78,6 @@ export function basketReducer(state = basketInitState, action){
 
 
             }
-
-            break;
-            console.log('crying');
             
 
         case 'EMPTY_BASKET':

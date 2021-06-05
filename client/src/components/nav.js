@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 export default function Nav() {
     
     const loggedIn = useSelector(state => state.user.logged_in);
+    const userId = useSelector(state => state.user.user_id);
     console.log(loggedIn);
 
     const handleSearch = (e) => {
@@ -28,8 +29,21 @@ export default function Nav() {
             <div>
 
                 {
-                    (loggedIn === false) ? <div><Link  to = "/login"><button className = "navbar-toggler">Login</button></Link>
-                    <Link to = "/register"><button className = "navbar-toggler">Register</button></Link></div> : ""
+                    (loggedIn === false) ? 
+                    <div>
+                        <Link  to = "/login">
+                            <button className = "navbar-toggler">Login</button>
+                        </Link>
+                        <Link to = "/register">
+                            <button className = "navbar-toggler">Register</button>
+                        </Link>
+                    </div> 
+                    : 
+                    <div>
+                        <Link to = {`/profile/${userId}`}><button className = "navbar-toggler">Profile</button></Link>
+
+                    </div>
+
                 }
                     
 
